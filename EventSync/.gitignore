@@ -1,0 +1,24 @@
+# Build artifacts
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# VS Code and Visual Studio settings
+.vscode/
+*.vs/
+
+# NuGet packages
+*.nupkg
+packages/
+
+# Logs
+*.log
+
+# Publish folder
+publish/
+
+# Others
+*.db

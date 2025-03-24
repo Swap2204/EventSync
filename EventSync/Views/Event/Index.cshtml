@@ -1,0 +1,130 @@
+@model IEnumerable<EventSync.Models.Event>
+
+@{
+    ViewData["Title"] = "Events List";
+}
+<style>
+    body {
+        background: linear-gradient(to bottom right, #87CEEB, #e0f7fa);
+        color: #004d66;
+    }
+
+    h2 {
+        color: #0288d1 !important;
+    }
+
+    .text-muted {
+        color: #0277bd !important;
+    }
+
+    .btn-success {
+        background-color: #0288d1;
+        border-color: #0288d1;
+        color: #fff;
+    }
+
+        .btn-success:hover {
+            background-color: #0277bd;
+            border-color: #0277bd;
+        }
+
+    .alert-info {
+        background-color: #e1f5fe;
+        border-color: #b3e5fc;
+        color: #0277bd;
+    }
+
+    .table-responsive {
+        background-color: #ffffff;
+        padding: 1rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    table.table {
+        background-color: #ffffff;
+        color: #004d66;
+    }
+
+    .table thead {
+        background-color: #e3f2fd;
+        color: #01579b;
+    }
+
+    .table td,
+    .table th {
+        border-color: #b3e5fc;
+    }
+
+    .btn-outline-warning {
+        color: #f9a825;
+        border-color: #f9a825;
+    }
+
+        .btn-outline-warning:hover {
+            background-color: #f9a825;
+            color: white;
+        }
+
+    .btn-outline-danger {
+        color: #d32f2f;
+        border-color: #d32f2f;
+    }
+
+        .btn-outline-danger:hover {
+            background-color: #d32f2f;
+            color: white;
+        }
+</style>
+
+<div class="text-center mb-4">
+    <h2 class="fw-bold">Your Events</h2>
+    <p class="text-muted">Manage your community events here.</p>
+    <a asp-action="Create" class="btn btn-success btn-lg mt-3">
+        <i class="bi bi-plus-circle"></i> Create New Event
+    </a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info text-center">
+        <strong>No events found.</strong> Click the <em>"Create New Event"</em> button above to add your first one.
+    </div>
+}
+else
+{
+    <div class="table-responsive shadow rounded">
+        <table class="table align-middle border">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Title</td>
+                        <td>@item.Description</td>
+                        <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                        <td>@item.Time.ToString(@"hh\:mm")</td>
+                        <td>@item.Location</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm me-1">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
